@@ -1,5 +1,3 @@
-package cryptography
-
 // шифры замены
 //шифр Цезаря
 //шифр Атбаш
@@ -15,27 +13,40 @@ package cryptography
 //Квадрат Полибия
 //Решетка Кардано
 
+interface ICryptography {
+    fun encode(message: String, key: String): String
+    fun decode(message: String, key: String): String
+}
+
 val AlphabetEN = " ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()
 val AlphabetRU = " АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".toCharArray()
 
-fun CharArray.getNum(c: Char): Int {
+fun CharArray.getNum(c: Char, ignoreSpace: Boolean = false): Int {
     val num = indexOf(c.toUpperCase());
-    if (num !in 1 until count()) {
-        throw IllegalArgumentException("'$c' isn't alphabetical symbol!!!")
+    if (num == -1 || (num == 0 && ignoreSpace)) {
+        throw IllegalArgumentException("'$c' isn't alphabetical symbol${if (!ignoreSpace) " оr space" else ""}")
     }
     return num
 }
 
-class PermutationVertical {
-    fun encode(message: String, key: String): String {
+class PermutationVertical : ICryptography {
+    override fun encode(message: String, key: String): String {
         var messageEncrypted = ""
+
+
+
         return messageEncrypted
     }
 
-    fun decode(message: String, key: String): String {
+    override fun decode(message: String, key: String): String {
         var messageDecrypted = ""
+
+
+
         return messageDecrypted
     }
+
+    private fun test() = 0
 }
 
 fun main(args: Array<String>) {
@@ -43,7 +54,8 @@ fun main(args: Array<String>) {
     val message = "Cегодня очень теплая погода"
     val key = "кактус"
 
-    val algorithm = PermutationVertical()
-    println("Исходное сообщение: '$message', ключ: '$key'. Зашифрованное сообщение: , расшифрованное сообщение: ")
+    val algorithmPV = PermutationVertical()
+    println("Исходное сообщение: '$message', ключ: '$key'. Зашифрованное сообщение: '${algorithmPV.encode(message, key)}', расшифрованное сообщение: '${algorithmPV.decode(message, key)}'")
+
 
 }
