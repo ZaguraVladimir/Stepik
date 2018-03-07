@@ -3,7 +3,7 @@
 //шифр Атбаш
 
 // шифры перестановки
-//шифр Сцитала.
+//шифр Скитала.
 //      Представлял собой длинную ленту с буквами, ключом этого шифра являлся твердый цилиндр определенного диаметра: ленту наматывали на цилиндр и получали исходный текст.
 //Aнаграммы(не совсем шифр, потому как для дешифрации не используется ключ)
 //шифр перестановки
@@ -21,16 +21,23 @@ interface ICryptography {
 val AlphabetEN = " ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray()
 val AlphabetRU = " АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ".toCharArray()
 
-fun CharArray.getNum(c: Char, ignoreSpace: Boolean = false): Int {
+fun CharArray.getNum(c: Char): Int {
     val num = indexOf(c.toUpperCase());
-    if (num == -1 || (num == 0 && ignoreSpace)) {
-        throw IllegalArgumentException("'$c' isn't alphabetical symbol${if (!ignoreSpace) " оr space" else ""}")
+    if (num !in 1 until count()) {
+        throw IllegalArgumentException("'$c' isn't alphabetical symbol")
     }
     return num
 }
 
+fun String.clean() = filter { it.isLetter() }
+
 class PermutationVertical : ICryptography {
     override fun encode(message: String, key: String): String {
+        val filterMessage = message.filter { it.isLetter() }
+        val table = Array(Math.ceil((filterMessage.length/key.length).toDouble()).toInt(), {Array(key.length, {' '})})
+        for (i in 0 until table.count()){
+             //table[i] = ;
+        }
         var messageEncrypted = ""
 
 
@@ -51,11 +58,10 @@ class PermutationVertical : ICryptography {
 
 fun main(args: Array<String>) {
 
-    val message = "Cегодня очень теплая погода"
+    val message = "Cегодня очень теплая погода!!!"
     val key = "кактус"
 
-    val algorithmPV = PermutationVertical()
-    println("Исходное сообщение: '$message', ключ: '$key'. Зашифрованное сообщение: '${algorithmPV.encode(message, key)}', расшифрованное сообщение: '${algorithmPV.decode(message, key)}'")
-
-
+    val algPV = PermutationVertical()
+    println("Исходное сообщение: '$message', ключ: '$key'. Зашифрованное сообщение: '${algPV.encode(message, key)}', расшифрованное сообщение: '${algPV.decode(message, key)}'")
+println(message.filter { it.isLetter() })
 }
