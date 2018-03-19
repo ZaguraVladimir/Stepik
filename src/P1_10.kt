@@ -8,10 +8,105 @@ val scan = Scanner(System.`in`)
 fun main(args: Array<String>) {
 
 
-    val n = scan.nextInt()
-    val arr = Array(n, {""})
-    for(i in n - 1 downTo 0){ arr[i] = scan.next().reversed()}
-    println(arr.joinToString(" "))
+    var balance = 10000
+    var opers = listOf(-11000, +1000, -1000)
+
+    for (oper in opers) {
+        if(balance + oper < 0){
+            print("Ошибка, недостаточно средств для списания. Баланс - $balance руб, нужно - ${Math.abs(oper)} руб")
+            return
+        }
+        balance += oper
+    }
+    print("Благодарим за то, что вы пользуетесь услугами нашей компании! Баланс - $balance руб")
+
+
+/*
+    var balance = scan.nextInt()
+    while (scan.hasNext()){
+        val oper = scan.nextInt()
+        if(balance + oper < 0){
+            print("Ошибка, недостаточно средств для списания. Баланс - $balance руб, нужно - $oper руб")
+            return
+        }
+        balance += oper
+    }
+    print("Благодарим за то, что вы пользуетесь услугами нашей компании! Баланс - $balance руб")
+*/
+
+
+
+
+
+//    var bal = scan.nextInt()
+//    while(scan.hasNext()){
+//        val op = scan.nextInt()
+//        if(bal - op < 0) {
+//            print("Ошибка, недостаточно средств для списания. Баланс - ${bal} руб, нужно - ${op} руб")
+//            return
+//        } else bal -= op
+//    }
+//    print("Благодарим за то, что вы пользуетесь услугами нашей компании! Баланс - ${bal} руб")
+
+
+
+
+
+//    var currSale = 0
+//    for (o in opers) {
+//        currSale = s
+//        if (s > balance){
+//            stop = true
+//            break
+//        }
+//        balance -= currSale
+//    }
+//    if (!stop) print("Благодарим за то, что вы пользуетесь услугами нашей компании! Баланс - $balance руб")
+//    else print("Ошибка, недостаточно средств для списания. Баланс - ${balance} руб, нужно - $currSale руб")
+
+
+//    var l = listOf<Int>()
+//    while (scan.hasNext()) l += scan.nextInt()
+//    val max = l.max()
+//    for((i,v) in l.withIndex())
+//        if (v == max){
+//            print("$v $i")
+//            break
+//        }
+
+//    var max = scan.nextInt()
+//    while(scan.hasNext()) {
+//        var n = scan.nextInt()
+//        if(max < n) max = n
+//    }
+//    print(max)
+
+//    var max = 0
+//    while(scan.hasNext()) {
+//        var n = scan.nextInt()
+//        if(max < n) max = n
+//    }
+//    print(max)
+
+//    val arr = IntArray(scan.nextInt(), { scan.nextInt() })
+//    val t = scan.nextInt()
+//    print(arr.filter { it == t }.sum())
+
+//    var sum = 0
+//    val r = 1..scan.nextInt()
+//    r.forEach { sum += scan.nextInt() }
+//    print(sum)
+
+//    val r = 1..scan.nextInt()
+//    val n = scan.nextInt()
+//    print(r.map { it * n }.joinToString(separator = " "))
+
+//    val n = scan.nextInt()
+//    val arr = Array(n, {""})
+//    val r = n - 1 downTo 0
+//    for(i in r){ arr[i] = scan.next().reversed()}
+//    println(arr.joinToString(" "))
+
 
 //    var arr = Array(10) { 0 }
 //    repeat(10){arr[it] = scan.nextInt()}
